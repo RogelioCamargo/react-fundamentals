@@ -10,10 +10,13 @@ function UsernameForm({onSubmitUsername}) {
   // events (which refreshes the page).
   // 📜 https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault
   //
+
+	const inputRef = React.useRef(); 
+
 	const handleSubmit = (event) => {
 		event.preventDefault(); 
 
-		onSubmitUsername(event.target.username.value);
+		onSubmitUsername(inputRef.current.value);
 	}
   // 🐨 get the value from the username input (using whichever method
   // you prefer from the options mentioned in the instructions)
@@ -28,7 +31,7 @@ function UsernameForm({onSubmitUsername}) {
     <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="useranme">Username:</label>
-        <input type="text" id="username" />
+        <input type="text" id="username" ref={inputRef} />
       </div>
       <button type="submit">Submit</button>
     </form>
