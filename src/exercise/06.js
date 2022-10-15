@@ -11,13 +11,22 @@ function UsernameForm({onSubmitUsername}) {
   // 📜 https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault
   //
 
-	const inputRef = React.useRef(); 
+  // const inputRef = React.useRef();
+  const [username, setUseranme] = React.useState('')
+  const [error, setError] = React.useState(null)
 
-	const handleSubmit = (event) => {
-		event.preventDefault(); 
+  const handleSubmit = event => {
+    event.preventDefault()
 
-		onSubmitUsername(inputRef.current.value);
-	}
+    // onSubmitUsername(inputRef.current.value);
+  }
+
+  const handleChange = event => {
+    const value = event.target.value
+    setUseranme(value)
+    const isValid = value === value.toLowerCase()
+    setError(isValid ? null : 'Username must be lower case')
+  }
   // 🐨 get the value from the username input (using whichever method
   // you prefer from the options mentioned in the instructions)
   // 💰 For example: event.target.elements[0].value
@@ -29,9 +38,19 @@ function UsernameForm({onSubmitUsername}) {
   // to do so, set the value of 'htmlFor' prop of the label to the id of input
   return (
     <form onSubmit={handleSubmit}>
+      {error ? (
+        <div role="alert" style={{color: 'red'}}>
+          {error}
+        </div>
+      ) : null}
       <div>
-        <label htmlFor="useranme">Username:</label>
-        <input type="text" id="username" ref={inputRef} />
+        <label htmlFor="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          value={username}
+          onChange={handleChange}
+        />
       </div>
       <button type="submit">Submit</button>
     </form>
