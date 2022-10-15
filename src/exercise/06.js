@@ -52,7 +52,7 @@ function UsernameForm({onSubmitUsername}) {
           onChange={handleChange}
         />
       </div>
-      <button type="submit">Submit</button>
+      <button disabled={Boolean(error)} type="submit">Submit</button>
     </form>
   )
 }
